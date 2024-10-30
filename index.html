@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+
+    <body class = "d-flex flex-column h-100">
+        <header class = "border-bottom d-flex flex-wrap align-items-center p-2" style = "background-color: rgb(26, 63, 118)">
+            <div class="col-1 text-start">
+                <img src="./Logo.png" alt="logo" style="width: auto; height: auto">
+            </div>
+
+            <div class="col-1 text-start">
+                <h5 style="display: block; margin: 0; color: rgb(255, 255, 255); font-weight: bold">Try not to</h3>
+                <h5 style="display: block; margin: 0; color: rgb(255, 255, 255); font-weight: bold">DIE</h3>
+            </div>
+
+            <div class = "col-1 text-start">
+                <a class="link-light text-decoration-none" id="patientsRef" style = "display: none" href="/">Пациенты</a>
+            </div>
+
+            <div class = "col-1 text-start">
+                <a class="link-light text-decoration-none" id="consultationsRef" style = "display: none" href="/">Консультации</a>
+            </div>
+
+            <div class = "col-1 text-end">
+                <a class="link-light text-decoration-none" id="reportRef" style = "display: none" href="/">Отчёты и статистика</a>
+            </div>
+
+            
+            <div class = "col-6 text-end"></div>
+            <div class = "col-1 text-center">
+                <a class = "btn btn-secondary" style = "display: true; background-color: transparent; border: none; color: white; font-weight: bold" href="/login" id = "login">Вход</a>
+                <div class="dropdown" id = "profilemenu" style = "display: none">
+                    <button class="btn w-100 d-flex justify-content-between align-items-center" style="background-color: transparent; border: none; color: white; outline: none" type="button" data-bs-toggle="dropdown" id="dropdownMenu" aria-expanded="false">
+                        <span class="text-truncate" style="max-width: 85%">Имявов Имя Имявович</span>
+                        <span class="dropdown-toggle"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <li><a class="dropdown-item" href="/profile">Профиль</a></li>
+                        <li><a class="dropdown-item" id="logout">Выход</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main>
+
+        </main>
+        
+        <footer>
+            
+        </footer>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src = "./routes.js"></script>
+        <script src = "./scripts/mainpage.js"></script>
+    </body>
+</html>
