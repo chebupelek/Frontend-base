@@ -1,5 +1,5 @@
 const password_pattern = RegExp("[a-zA-Z0-9]{6,}");
-const email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/;
 
 document.querySelector("#loginBut").addEventListener("click", () => {
     const mail = document.querySelector("#mail");

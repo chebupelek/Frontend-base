@@ -62,7 +62,6 @@ function handleRegistration() {
         phone: phone,
         speciality: speciality
     };
-    console.log(registrationData);
 
     $.ajax({
         url: `https://mis-api.kreosoft.space/api/doctor/register`,

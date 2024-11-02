@@ -1,6 +1,6 @@
 <div class="container align-items-center justify-items-center mt-5 w-25">
-    <form id="registrationForm" class="border p-4 shadow-sm rounded" style="background-color: #f6f6fb">
-        <div class="h2 mb-3">Регистрация</div>
+    <form id="profileForm" class="border p-4 shadow-sm rounded" style="background-color: #f6f6fb">
+        <div class="h2 mb-3">Профиль</div>
         
         <label for="name" style="color: #8d8da9">Имя</label>
         <div class="input-group mb-3">
@@ -12,7 +12,6 @@
             <div class="col-6">
                 <label for="gender" style="color: #8d8da9" class="form-label">Пол</label>
                 <select class="form-select" id="gender" required>
-                    <option value="" disabled selected>Выберите</option>
                     <option value="Male">Мужской</option>
                     <option value="Female">Женский</option>
                 </select>
@@ -31,27 +30,13 @@
             <div class="invalid-feedback">Введите номер телефона</div>
         </div>
         
-        <label for="speciality" style="color: #8d8da9">Специальность</label>
-        <div class="input-group mb-3">
-            <select class="form-select" id="speciality" required>
-                <option value="" disabled selected>Выберите специальность</option>
-            </select>
-            <div class="invalid-feedback">Выберите специальность</div>
-        </div>
-        
         <label for="email" style="color: #8d8da9">Email</label>
         <div class="input-group mb-3">
             <input class="form-control" type="email" id="email" placeholder="youremail@example.example" required>
             <div class="invalid-feedback">Введите корректный email</div>
         </div>
         
-        <label for="password" class="mt-2" style="color: #8d8da9">Пароль</label>
-        <div class="input-group mb-3">
-            <input class="form-control" type="password" id="password" placeholder="yourpasswordexample" required>
-            <div class="invalid-feedback">Пароль должен быть не менее 6 символов</div>
-        </div>
-        
-        <button class="btn btn-primary w-100 mt-2" id="registerBtn" type="button" style="background-color: #317cb9" disabled>Регистрация</button>
+        <button class="btn btn-primary w-100 mt-2" id="saveProfileBtn" type="button" style="background-color: #317cb9" disabled>Сохранить изменения</button>
     </form>
 </div>
-<script src="/scripts/registration.js"></script>
+<script src="/scripts/profile.js"></script>

@@ -31,14 +31,13 @@
             <div class = "col-6 text-end"></div>
             <div class = "col-1 text-center">
                 <a class = "btn btn-secondary" style = "display: true; background-color: transparent; border: none; color: white; font-weight: bold" href="/login" id = "login">Вход</a>
-                <div class="dropdown" id = "profilemenu" style = "display: none">
-                    <button class="btn w-100 d-flex justify-content-between align-items-center" style="background-color: transparent; border: none; color: white; outline: none" type="button" data-bs-toggle="dropdown" id="dropdownMenu" aria-expanded="false">
-                        <span class="text-truncate" style="max-width: 85%">Имявов Имя Имявович</span>
-                        <span class="dropdown-toggle"></span>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle w-100 text-truncate" style="display: none; background-color: transparent; border: none; color: white; outline: none" type="button" data-bs-toggle="dropdown" id="dropdownMenu" aria-expanded="false">
+                        Имявов Имя Имявович
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                         <li><a class="dropdown-item" href="/profile">Профиль</a></li>
-                        <li><a class="dropdown-item" id="logout">Выход</a></li>
+                        <li><a class="dropdown-item" id = "logout">Выход</a></li>
                     </ul>
                 </div>
             </div>

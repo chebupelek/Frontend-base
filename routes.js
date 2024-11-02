@@ -15,6 +15,12 @@ switch (route) {
             document.querySelector("head").innerHTML+=`<title>registration</title>`;
         });
         break;
+    case "/profile":
+        $.get("pages/profile/profile.html", (data)=>{
+            updatepage(data);
+            document.querySelector("head").innerHTML+=`<title>profile</title>`;
+        });
+        break;
 }
 
 function updatepage(page){

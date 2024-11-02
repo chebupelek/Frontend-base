@@ -11,6 +11,7 @@ window.addEventListener("load", ()=>{
             },
             contentType: "application/json",
             success: function(data){
+                console.log(data);
                 showLoggedInView(data.name)
             },
             error: function(t){
@@ -51,7 +52,7 @@ document.querySelector("#logout").addEventListener("click", ()=>{
 });
 
 function showLoggedOutView() {
-    document.querySelector("#profilemenu").style.display = "none";
+    document.querySelector("#dropdownMenu").style.display = "none";
     document.querySelector("#login").style.display = "block";
     document.querySelector("#patientsRef").style.display = "none";
     document.querySelector("#consultationsRef").style.display = "none";
@@ -63,7 +64,7 @@ function showLoggedOutView() {
 
 function showLoggedInView(username) {
     document.querySelector("#dropdownMenu").textContent = username;
-    document.querySelector("#profilemenu").style.display = "block";
+    document.querySelector("#dropdownMenu").style.display = "block";
     document.querySelector("#login").style.display = "none";
     document.querySelector("#patientsRef").style.display = "block";
     document.querySelector("#consultationsRef").style.display = "block";
