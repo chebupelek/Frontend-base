@@ -9,8 +9,11 @@ switch (route) {
             document.querySelector("head").innerHTML+=`<title>login</title>`;
         });
         break;
-    case "/profile":
-        console.log("profile");
+    case "/registration":
+        $.get("pages/registration/registration.html", (data)=>{
+            updatepage(data);
+            document.querySelector("head").innerHTML+=`<title>registration</title>`;
+        });
         break;
 }
 

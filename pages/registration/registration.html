@@ -1,0 +1,57 @@
+<div class="container align-items-center justify-items-center mt-5 w-25">
+    <form id="registrationForm" class="border p-4 shadow-sm rounded" style="background-color: #f6f6fb">
+        <div class="h2 mb-3">Регистрация</div>
+        
+        <label for="name" style="color: #8d8da9">Имя</label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="text" id="name" placeholder="yournameexample" required>
+            <div class="invalid-feedback">Введите имя</div>
+        </div>
+        
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6">
+                <label for="gender" style="color: #8d8da9" class="form-label">Пол</label>
+                <select class="form-select" id="gender" required>
+                    <option value="" disabled selected>Выберите</option>
+                    <option value="Male">Мужской</option>
+                    <option value="Female">Женский</option>
+                </select>
+                <div class="invalid-feedback">Выберите пол</div>
+            </div>
+            <div class="col-6">
+                <label for="date" style="color: #8d8da9" class="form-label mx-3">Дата рождения</label>
+                <input type="date" class="form-control" id="date" required>
+                <div class="invalid-feedback">Введите дату рождения</div>
+            </div>
+        </div>
+        
+        <label for="phone" style="color: #8d8da9">Телефон</label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="tel" id="phone" placeholder="+7 (xxx) xxx-xx-xx" required>
+            <div class="invalid-feedback">Введите номер телефона</div>
+        </div>
+        
+        <label for="speciality" style="color: #8d8da9">Специальность</label>
+        <div class="input-group mb-3">
+            <select class="form-select" id="speciality" required>
+                <option value="" disabled selected>Выберите специальность</option>
+            </select>
+            <div class="invalid-feedback">Выберите специальность</div>
+        </div>
+        
+        <label for="email" style="color: #8d8da9">Email</label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="email" id="email" placeholder="youremail@example.example" required>
+            <div class="invalid-feedback">Введите корректный email</div>
+        </div>
+        
+        <label for="password" class="mt-2" style="color: #8d8da9">Пароль</label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="password" id="password" placeholder="yourpasswordexample" required>
+            <div class="invalid-feedback">Пароль должен быть не менее 6 символов</div>
+        </div>
+        
+        <button class="btn btn-primary w-100 mt-2" id="registerBtn" type="button" disabled>Регистрация</button>
+    </form>
+</div>
+<script src="/scripts/registration.js"></script>
