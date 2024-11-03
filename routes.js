@@ -21,6 +21,12 @@ switch (route) {
             document.querySelector("head").innerHTML+=`<title>profile</title>`;
         });
         break;
+    case "/patients":
+        $.get("pages/patients/patients.html", (data)=>{
+            updatepage(data);
+            document.querySelector("head").innerHTML+=`<title>patients</title>`;
+        });
+        break;
 }
 
 function updatepage(page){
