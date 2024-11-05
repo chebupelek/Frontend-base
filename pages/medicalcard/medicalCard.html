@@ -1,0 +1,69 @@
+<div class="container align-items-center justify-items-center mt-5 w-75">
+    <form class="mb-3">
+        <div class="row align-items-center justify-items-center">
+            <div class="col-6 text-start">
+                <div class="h2">Медицинская карта пациента</div>
+            </div>
+            <div class="col-6 text-end">
+                <button class="btn btn-primary" id="registerModal" type="button" style="background-color: #317cb9">Добавить осмотр</button>
+            </div>
+        </div>
+    </form>
+
+    <form class="mb-3">
+        <div class="row align-items-center justify-items-center">
+            <div class="col-6 text-start">
+                <div class="h4" id="pacientName">Имя пациента</div>
+            </div>
+            <div class="col-6 text-end">
+                <div id="pacientBirthDate">Дата рождения</div>
+            </div>
+        </div>
+    </form>
+
+    <form class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6">
+                <label for="mkbs" style="color: #8d8da9" class="form-label">МКБ-10</label>
+                <select id="mkbs" class="form-select w-100 text-truncate" style="width: 100%;">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-3">
+                <input class="form-check-input" type="radio" name="filter" id="repeated">
+                <label class="form-check-label" for="repeated">Сгруппировать по повторным</label>
+            </div>
+            <div class="col-3">
+                <input class="form-check-input" type="radio" name="filter" id="all" checked>
+                <label class="form-check-label" for="all">Показать все</label>
+            </div>
+        </div>
+
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6 text-start">
+                <label for="patientsNum" style="color: #8d8da9" class="form-label">Число осмотров на странице</label>
+                <select id="patientsNum" class="form-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <div class="col-6 text-end">
+                <button class="btn btn-primary w-100" id="findBtn" type="button" style="background-color: #317cb9">Поиск</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="inspectionsContainer" class="row row-cols-1 row-cols-md-2 g-4"></div>
+
+    <nav id="paginationContainer" class="text-center mt-3 mb-3"></nav>
+</div>
+
+<script src="/scripts/medicalCard.js"></script>

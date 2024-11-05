@@ -1,34 +1,49 @@
-document.querySelector("head").innerHTML = `<meta charset="UTF-8">`;
+const router = new Navigo("/");
 
-let route = window.location.pathname;
-console.log(route);
-switch (route) {
-    case "/login":
-        $.get("pages/login/login.html", (data)=>{
-            updatepage(data);
-            document.querySelector("head").innerHTML+=`<title>login</title>`;
-        });
-        break;
-    case "/registration":
-        $.get("pages/registration/registration.html", (data)=>{
-            updatepage(data);
-            document.querySelector("head").innerHTML+=`<title>registration</title>`;
-        });
-        break;
-    case "/profile":
-        $.get("pages/profile/profile.html", (data)=>{
-            updatepage(data);
-            document.querySelector("head").innerHTML+=`<title>profile</title>`;
-        });
-        break;
-    case "/patients":
-        $.get("pages/patients/patients.html", (data)=>{
-            updatepage(data);
-            document.querySelector("head").innerHTML+=`<title>patients</title>`;
-        });
-        break;
-}
-
-function updatepage(page){
+function updatePage(page) {
     $("main").html(page);
 }
+
+function setPageTitle(title) {
+    document.querySelector("head").innerHTML += `<title>${title}</title>`;
+}
+
+router
+    .on("/login", () => {
+        $.get("pages/login/login.html", (data) => {
+            updatePage(data);
+            setPageTitle("login");
+        });
+    })
+    .on("/registration", () => {
+        $.get("pages/registration/registration.html", (data) => {
+            updatePage(data);
+            setPageTitle("registration");
+        });
+    })
+    .on("/profile", () => {
+        $.get("pages/profile/profile.html", (data) => {
+            updatePage(data);
+            setPageTitle("profile");
+        });
+    })
+    .on("/patients", () => {
+        $.get("pages/patients/patients.html", (data) => {
+            updatePage(data);
+            setPageTitle("patients");
+        });
+    })
+    .on("/patient/:id", (params, query) => {
+        const patientId = params.id;
+        $.get("pages/medicalcard/medicalCard.html?id=${patientId}", (data) => {
+            updatePage(data);
+            setPageTitle(`Patient`);
+        });
+    })
+    .notFound(() => {
+        updatePage("<h1>404 - Page Not Found</h1>");
+    });
+
+router.resolve();
+
+router.updatePageLinks();

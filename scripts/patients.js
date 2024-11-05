@@ -156,7 +156,7 @@ function displayPatients(patients) {
 
         const patientCard = `
             <div class="col">
-                <div class="card h-100 shadow-sm rounded" style="background-color: #f6f6fb" onclick="window.location.href='/patient/${patient.id}'">
+                <div class="card h-100 shadow-sm rounded" style="background-color: #f6f6fb" onclick="router.navigate('/patient/${patient.id}')">
                     <div class="card-body">
                         <h5 class="card-title mb-1">${patient.name}</h5>
                         <p class="card-text mb-0"><span style="color: #8d8da9;">Пол - </span><strong>${gender}</strong></p>
