@@ -6,16 +6,15 @@ $(document).ready(function () {
     const patientId = patientIdMatch ? patientIdMatch[1] : '39abadc7-9656-4d74-bd7e-28e927a1f81b';
     console.log("Patient ID:", patientId);
 
-    const baseUrl = 'https://mis-api.kreosoft.space/api';
-
     function loadPatientInfo() {
         $.ajax({
-            url: `/patient/${patientId}`,
+            url: `https://mis-api.kreosoft.space/api/patient/${patientId}`,
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`
             },
             success: function(data) {
+                console.log(data);
                 $('#pacientName').text(data.name);
                 $('#pacientBirthDate').text(`Дата рождения: ${new Date(data.birthday).toLocaleDateString()}`);
             },
@@ -27,7 +26,7 @@ $(document).ready(function () {
 
     function loadICD10Options() {
         $.ajax({
-            url: `${baseUrl}/dictionary/icd10/roots`,
+            url: `https://mis-api.kreosoft.space/api/dictionary/icd10/roots`,
             method: "GET",
             success: function(data) {
                 const mkbSelect = $('#mkbs');
@@ -43,7 +42,7 @@ $(document).ready(function () {
     }
 
     function loadInspections(grouped = false, icdRoots = '', page = 1, size = 6) {
-        const url = new URL(`${baseUrl}/patient/${patientId}/inspections`);
+        const url = new URL(`https://mis-api.kreosoft.space/api/patient/${patientId}/inspections`);
         url.searchParams.append('page', page);
         url.searchParams.append('size', size);
         
@@ -78,7 +77,7 @@ $(document).ready(function () {
             let cardStyle = 'background-color: #f6f6fb';
             let addButton = `
                 <div class="col-2 text-end">
-                    <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9"><strong>Добавить осмотр</strong></button>
+                    <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="AddInspection('${inspect.id}')"><strong>Добавить осмотр</strong></button>
                 </div>`;
     
             switch (inspect.conclusion) {
@@ -176,7 +175,7 @@ $(document).ready(function () {
         let cardStyle = 'background-color: #f6f6fb';
         let addButton = `
             <div class="col-2 text-end">
-                <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9"><strong>Добавить осмотр</strong></button>
+                <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="AddInspection('${inspect.id}')"><strong>Добавить осмотр</strong></button>
             </div>`;
 
         switch (inspect.conclusion) {
@@ -239,7 +238,7 @@ $(document).ready(function () {
             let cardStyle = 'background-color: #f6f6fb';
             let addButton = `
                 <div class="col-2 text-end">
-                    <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9"><strong>Добавить осмотр</strong></button>
+                    <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="AddInspection('${childList[i].id}')"><strong>Добавить осмотр</strong></button>
                 </div>`;
             let openButton = ``;
     
@@ -348,4 +347,27 @@ function OpenChild(id) {
     } else {
         element.style.display = "none";
     }
+}
+
+function getPatientId() {
+    const pathname = window.location.pathname;
+    const patientIdMatch = pathname.match(/\/patient\/([a-f0-9-]+)/i);
+    return patientIdMatch ? patientIdMatch[1] : '39abadc7-9656-4d74-bd7e-28e927a1f81b';
+}
+
+function MedicalCardCreate(){
+    const patientId = getPatientId();
+    localStorage.removeItem("patientId");
+    localStorage.removeItem("inspectionId");
+    localStorage.setItem("patientId", patientId);
+    window.location.href = "/inspectionCreate";
+}
+
+function AddInspection(inspectionId) {
+    const patientId = getPatientId();
+    localStorage.removeItem("patientId");
+    localStorage.removeItem("inspectionId");
+    localStorage.setItem("patientId", patientId);
+    localStorage.setItem("inspectionId", inspectionId);
+    window.location.href = "/inspectionCreate";
 }

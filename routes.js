@@ -35,9 +35,15 @@ router
     })
     .on("/patient/:id", (params, query) => {
         const patientId = params.id;
-        $.get("pages/medicalcard/medicalCard.html?id=${patientId}", (data) => {
+        $.get("pages/medicalcard/medicalCard.html", (data) => {
             updatePage(data);
             setPageTitle(`Patient`);
+        });
+    })
+    .on("/inspectionCreate", () => {
+        $.get("pages/inspectioncreate/inspectionCreate.html", (data) => {
+            updatePage(data);
+            setPageTitle(`Create`);
         });
     })
     .notFound(() => {

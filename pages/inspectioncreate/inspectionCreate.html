@@ -1,0 +1,192 @@
+<div class="container align-items-center justify-items-center mt-5 w-75">
+    <form class="mb-3">
+        <div class="row align-items-center justify-items-center">
+            <div class="col-12 text-start">
+                <div class="h2">Создание осмотра</div>
+            </div>
+        </div>
+    </form>
+
+    <div class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6 text-start">
+                <div class="h4" id="pacientName">Имя пациента</div>
+            </div>
+            <div class="col-6 text-end">
+                <div id="pacientBirthDate"><strong>Дата рождения:</strong></div>
+            </div>
+        </div>
+        <div class="row align-items-center mb-3">
+            <div class="col-auto">Первичный осмотр</div>
+            <div class="col-auto form-check form-switch mx-2">
+                <input class="form-check-input" type="checkbox" role="switch" id="inspectionType">
+            </div>
+            <div class="col-auto">Вторичный осмотр</div>
+        </div>
+        <div class="row align-items-center justify-items-center" id="previousInspectionSection">
+            <div class="col-4 text-start">
+                <label for="previous" style="color: #8d8da9">Предыдущий осмотр</label>
+                <select class="form-select mb-3" id="previous">
+                    <option value="" disabled selected>Выберите предыдущий осмотр</option>
+                </select>
+            </div>
+        </div>
+        <div class="row align-items-center justify-items-center">
+            <div class="col-4 text-start">
+                <label for="datetime" style="color: #8d8da9" class="form-label">Дата и время осмотра</label>
+                <input type="datetime-local" class="form-control" id="datetime">
+            </div>
+        </div>
+    </div>
+
+    <div class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6 text-start">
+                <div class="h4" style="color: #153b73">Жалобы</div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="complaints" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6 text-start">
+                <div class="h4" style="color: #153b73">Анамнез заболевания</div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="anamnesis" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6 text-start">
+                <div class="h4" style="color: #153b73">Консультация</div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-3 text-start">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="consultation">
+                    <label class="form-check-label" for="consultation">Требуется консультация</label>
+                </div>
+            </div>
+            <div class="col-9 text-end" id="specialitySelection" style="display: none;">
+                <select class="form-select" id="speciality">
+                    <option value="" disabled selected>Выберите специальность</option>
+                </select>
+            </div>
+        </div>
+    
+        <div class="row align-items-center justify-items-center mb-3" id="comment" style="display: none;">
+            <div class="col-12 text-start">
+                <label for="commentData" style="color: #8d8da9" class="form-label">Комментарий</label>
+                <textarea class="form-control" id="commentData" rows="3"></textarea>
+            </div>
+        </div>
+    
+        <div class="row align-items-center justify-items-center mb-3" id="addConsultationButtonCard" style="display: none;">
+            <div class="col-3 text-start">
+                <button class="btn btn-primary w-100" id="addConsultationButton" type="button" style="background-color: #317cb9" disabled>Добавить консультацию</button>
+            </div>
+        </div>
+    
+        <div id="consultations" class="col"></div>
+    </div>
+
+    <div class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6 text-start">
+                <div class="h4" style="color: #153b73">Диагнозы</div>
+            </div>
+        </div>
+
+        <div id="diagnozises" class="col mt-3"></div>
+
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-12 text-start">
+                <label for="mkbs" style="color: #8d8da9">Болезни</label>
+                <select class="form-select mb-3" id="mkbs">
+                    <option value="" disabled selected>Выберите болезнь</option>
+                </select>
+            </div>
+        </div>
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="form-group">
+                <textarea class="form-control" id="diagnozComment" rows="1"></textarea>
+            </div>
+        </div>
+        <div class="row align-items-center justify-items-center mb-1">
+            <div style="color: #8d8da9"> Тип диагноза в осмотре:</div>
+        </div>
+        <div class="row align-items-center mb-1">
+            <div class="col-auto">
+                <input class="form-check-input" type="radio" name="type" id="Main">
+                <label class="form-check-label ms-1" for="Main">Основной</label>
+            </div>
+            <div class="col-auto">
+                <input class="form-check-input" type="radio" name="type" id="Concomitant">
+                <label class="form-check-label ms-1" for="Concomitant">Сопутствующий</label>
+            </div>
+            <div class="col-auto">
+                <input class="form-check-input" type="radio" name="type" id="Complication">
+                <label class="form-check-label ms-1" for="Complication">Осложнение</label>
+            </div>
+        </div>
+        <div class="row align-items-center justify-items-center">
+            <div class="col-3 text-start">
+                <button class="btn btn-primary w-100" id="addDiagnozisButton" type="button" style="background-color: #317cb9">Добавить диагноз</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6 text-start">
+                <div class="h4" style="color: #153b73">Рекомендации по лечению</div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="treatments" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="h4" style="color: #153b73">Заключение</div>
+            <div class="col-6 text-start">
+                <label for="conclusion" style="color: #8d8da9" class="form-label">Число осмотров на странице</label>
+                <select id="conclusion" class="form-select">
+                    <option value="Disease">Болезнь</option>
+                    <option value="Recovery">Выздоровление</option>
+                    <option value="Death">Смерть</option>
+                </select>
+            </div>
+            <div class="col-6 text-start">
+                <div id="nextDate">
+                    <label for="conclusionNextDate" style="color: #8d8da9" class="form-label">Дата следующего визита</label>
+                    <input type="datetime-local" class="form-control" id="conclusionNextDate">
+                </div>
+                <div id="deathDate" style="display: none">
+                    <label for="conclusionDeathDate" style="color: #8d8da9" class="form-label">Дата смерти</label>
+                    <input type="datetime-local" class="form-control" id="conclusionDeathDate">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6 text-start">
+                <button class="btn btn-primary w-100" id="createInspectionButton" type="button" style="background-color: #317cb9">Сохранить осмотр</button>
+            </div>
+            <div class="col-6 text-end">
+                <button class="btn btn-primary w-100" id="cancelButton" type="button" style="background-color: #d3d3eb; border: none">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/scripts/inspectionCreate.js"></script>
