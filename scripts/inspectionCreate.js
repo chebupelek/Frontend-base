@@ -51,7 +51,6 @@ $(document).ready(function () {
             method: "GET",
             contentType: "application/json",
             success: function(data) {
-                console.log(data);
                 const records = data.records;
                 const recordsSelect = $('#mkbs');
                 records.forEach(rec => {
@@ -77,7 +76,6 @@ $(document).ready(function () {
             },
             contentType: "application/json",
             success: function(data) {
-                console.log(data);
                 const inspections = data;
                 const inspectionsSelect = $('#previous');
                 let completedRequests = 0;
@@ -87,7 +85,6 @@ $(document).ready(function () {
                         method: "GET",
                         contentType: "application/json",
                         success: function(mkbs) {
-                            console.log(mkbs);
                             const inspectionDate = new Date(inspec.date);
                             const formattedDate = inspectionDate.toLocaleDateString();
                             const formattedTime = inspectionDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -292,7 +289,6 @@ $(document).ready(function () {
     
     function saveInspection() {
         let result = getInspectionData();
-        console.log(result);
         $.ajax({
             url: `https://mis-api.kreosoft.space/api/patient/${patientId}/inspections`,
             method: "POST",
@@ -302,7 +298,6 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify(result),
             success: function() {
-                console.log("yeeeee");
                 alert("Успешно");
                 window.location.href = '/patients';
             },
@@ -318,8 +313,6 @@ function getPrevInspecByLS(){
     const inspectionTypeSwitch = document.getElementById('inspectionType');
     const previousInspectionSection = document.getElementById('previousInspectionSection');
     const previousSelect = document.getElementById('previous');
-    console.log("saved");
-    console.log(inspectionId);
     if (inspectionId) {
         inspectionTypeSwitch.checked = true;
         previousInspectionSection.style.display = 'block';

@@ -10,38 +10,44 @@ function setPageTitle(title) {
 
 router
     .on("/login", () => {
-        $.get("pages/login/login.html", (data) => {
+        $.get("/pages/login/login.html", (data) => {
             updatePage(data);
             setPageTitle("login");
         });
     })
     .on("/registration", () => {
-        $.get("pages/registration/registration.html", (data) => {
+        $.get("/pages/registration/registration.html", (data) => {
             updatePage(data);
             setPageTitle("registration");
         });
     })
     .on("/profile", () => {
-        $.get("pages/profile/profile.html", (data) => {
+        $.get("/pages/profile/profile.html", (data) => {
             updatePage(data);
             setPageTitle("profile");
         });
     })
     .on("/patients", () => {
-        $.get("pages/patients/patients.html", (data) => {
+        $.get("/pages/patients/patients.html", (data) => {
             updatePage(data);
             setPageTitle("patients");
         });
     })
     .on("/patient/:id", (params, query) => {
         const patientId = params.id;
-        $.get("pages/medicalcard/medicalCard.html", (data) => {
+        $.get("/pages/medicalcard/medicalCard.html", (data) => {
             updatePage(data);
             setPageTitle(`Patient`);
         });
     })
     .on("/inspectionCreate", () => {
-        $.get("pages/inspectioncreate/inspectionCreate.html", (data) => {
+        $.get("/pages/inspectioncreate/inspectionCreate.html", (data) => {
+            updatePage(data);
+            setPageTitle(`Create`);
+        });
+    })
+    .on("/inspection/:id", (params, query) => {
+        $.get("/pages/inspectiondata/inspectionData.html", (data) => {
             updatePage(data);
             setPageTitle(`Create`);
         });

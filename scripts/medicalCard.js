@@ -1,11 +1,8 @@
 $(document).ready(function () {
     const token = localStorage.getItem("token");
-
     const pathname = window.location.pathname;
     const patientIdMatch = pathname.match(/\/patient\/([a-f0-9-]+)/i);
     const patientId = patientIdMatch ? patientIdMatch[1] : '39abadc7-9656-4d74-bd7e-28e927a1f81b';
-    console.log("Patient ID:", patientId);
-
     function loadPatientInfo() {
         $.ajax({
             url: `https://mis-api.kreosoft.space/api/patient/${patientId}`,
@@ -14,7 +11,6 @@ $(document).ready(function () {
                 'Authorization': `Bearer ${token}`
             },
             success: function(data) {
-                console.log(data);
                 $('#pacientName').text(data.name);
                 $('#pacientBirthDate').text(`Дата рождения: ${new Date(data.birthday).toLocaleDateString()}`);
             },
@@ -23,7 +19,6 @@ $(document).ready(function () {
             }
         });
     }
-
     function loadICD10Options() {
         $.ajax({
             url: `https://mis-api.kreosoft.space/api/dictionary/icd10/roots`,
@@ -40,17 +35,12 @@ $(document).ready(function () {
             }
         });
     }
-
     function loadInspections(grouped = false, icdRoots = '', page = 1, size = 6) {
         const url = new URL(`https://mis-api.kreosoft.space/api/patient/${patientId}/inspections`);
         url.searchParams.append('page', page);
-        url.searchParams.append('size', size);
-        
+        url.searchParams.append('size', size); 
         if (grouped) url.searchParams.append('grouped', grouped);
         if (icdRoots) url.searchParams.append('icdRoots', icdRoots);
-
-        console.log(url.toString());
-
         $.ajax({
             url: url.toString(),
             method: "GET",
@@ -58,7 +48,6 @@ $(document).ready(function () {
                 'Authorization': `Bearer ${token}`
             },
             success: function(data) {
-                console.log(data);
                 renderInspections(data.inspections, grouped);
                 setupPagination(data.pagination, grouped, icdRoots, size);
             },
@@ -67,19 +56,16 @@ $(document).ready(function () {
             }
         });
     }
-
     function renderInspections(inspections, grouped) {
         const container = $('#inspectionsContainer');
         container.empty();
         inspections.forEach(inspect => {
-            console.log(inspect);
             let statusText = '';
             let cardStyle = 'background-color: #f6f6fb';
             let addButton = `
                 <div class="col-2 text-end">
                     <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="AddInspection('${inspect.id}')"><strong>Добавить осмотр</strong></button>
                 </div>`;
-    
             switch (inspect.conclusion) {
                 case 'Disease':
                     statusText = 'Болезнь';
@@ -95,9 +81,7 @@ $(document).ready(function () {
                 default:
                     statusText = inspect.status;
             }
-
             if(inspect.hasNested == true) addButton = '';
-    
             if(!grouped){
                 const inspectionCard = `
                 <div class="col">
@@ -112,7 +96,7 @@ $(document).ready(function () {
                                 </div>
                                 ${addButton}
                                 <div class="col-2 text-end">
-                                    <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9"><strong>Детали осмотра</strong></button>
+                                    <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="router.navigate('/inspection/${inspect.id}')"><strong>Детали осмотра</strong></button>
                                 </div>
                             </div>
                             <p><strong>Заключение: ${statusText}</strong></p>
@@ -131,7 +115,6 @@ $(document).ready(function () {
                             'Authorization': `Bearer ${token}`
                         },
                         success: function(data) {
-                            console.log(data);
                             let chainCard = createchainCardList(inspect, data);
                             container.append(chainCard);
                         },
@@ -153,7 +136,7 @@ $(document).ready(function () {
                                     </div>
                                     ${addButton}
                                     <div class="col-2 text-end">
-                                        <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9"><strong>Детали осмотра</strong></button>
+                                        <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="router.navigate('/inspection/${inspect.id}')"><strong>Детали осмотра</strong></button>
                                     </div>
                                 </div>
                                 <p><strong>Заключение: ${statusText}</strong></p>
@@ -167,7 +150,6 @@ $(document).ready(function () {
             }
         });
     }
-
     function createchainCardList(inspect, data)
     {
         let childsCard = createChildList(data);
@@ -177,7 +159,6 @@ $(document).ready(function () {
             <div class="col-2 text-end">
                 <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="AddInspection('${inspect.id}')"><strong>Добавить осмотр</strong></button>
             </div>`;
-
         switch (inspect.conclusion) {
             case 'Disease':
                 statusText = 'Болезнь';
@@ -193,7 +174,6 @@ $(document).ready(function () {
             default:
                 statusText = inspect.status;
         }
-
         if(inspect.hasNested == true){
             addButton = '';
             openButton = `
@@ -201,7 +181,6 @@ $(document).ready(function () {
                 <button class="btn btn-primary" type="button" style="background-color: #317cb9" onclick="OpenChild('${data[0].id}')">+</button>
             </div>`;
         }
-
         const inspectionCard = `
             <div class="col mt-2">
                 <div class="card h-100 shadow-sm rounded" style="${cardStyle}">
@@ -216,7 +195,7 @@ $(document).ready(function () {
                             </div>
                             ${addButton}
                             <div class="col-2 text-end">
-                                <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9"><strong>Детали осмотра</strong></button>
+                                <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="router.navigate('/inspection/${inspect.id}')"><strong>Детали осмотра</strong></button>
                             </div>
                         </div>
                         <p><strong>Заключение: ${statusText}</strong></p>
@@ -226,10 +205,8 @@ $(document).ready(function () {
                     ${childsCard}
                 </div>
             </div>`;
-        
         return inspectionCard;
     }
-
     function createChildList(childList)
     {
         let childs ='';
@@ -241,7 +218,6 @@ $(document).ready(function () {
                     <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="AddInspection('${childList[i].id}')"><strong>Добавить осмотр</strong></button>
                 </div>`;
             let openButton = ``;
-    
             switch (childList[i].conclusion) {
                 case 'Disease':
                     statusText = 'Болезнь';
@@ -257,7 +233,6 @@ $(document).ready(function () {
                 default:
                     statusText = inspect.status;
             }
-
             if(childList[i].hasNested == true){
                 addButton = '';
                 openButton = `
@@ -265,7 +240,6 @@ $(document).ready(function () {
                     <button class="btn btn-primary" type="button" style="background-color: #317cb9" onclick="OpenChild('${childList[i+1].id}')">+</button>
                 </div>`;
             }
-
             const inspectionCard = `
                 <div class="col mt-2">
                     <div class="card h-100 shadow-sm rounded" id="${childList[i].id}" style="${cardStyle}; display: none">
@@ -280,7 +254,7 @@ $(document).ready(function () {
                                 </div>
                                 ${addButton}
                                 <div class="col-2 text-end">
-                                    <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9"><strong>Детали осмотра</strong></button>
+                                    <button class="btn btn-outline-info btn-sm" style="background-color: transparent; border: none; color: #317cb9" onclick="router.navigate('/inspection/${childList[i].id}')"><strong>Детали осмотра</strong></button>
                                 </div>
                             </div>
                             <p><strong>Заключение: ${statusText}</strong></p>
@@ -290,41 +264,32 @@ $(document).ready(function () {
                         ${childs}
                     </div>
                 </div>`;
-            
             childs = inspectionCard;
         }
         return childs;
     }
-    
-
     function setupPagination(pagination, grouped, icdRoots, size) {
         const paginationContainer = $('#paginationContainer');
         paginationContainer.empty();
         const currentPage = pagination.current;
         const totalPages = pagination.count;
-
         if (currentPage > 1) {
             paginationContainer.append(`<button class="btn btn-outline-primary mx-1 pagination-btn" data-page="${currentPage - 1}">«</button>`);
         }
-
         for (let i = 1; i <= totalPages; i++) {
             paginationContainer.append(`<button class="btn btn-outline-primary mx-1 pagination-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`);
         }
-
         if (currentPage < totalPages) {
             paginationContainer.append(`<button class="btn btn-outline-primary mx-1 pagination-btn" data-page="${currentPage + 1}">»</button>`);
         }
-
         $('.pagination-btn').on('click', function () {
             const newPage = $(this).data('page');
             loadInspections(grouped, icdRoots, newPage, size);
         });
     }
-
     loadPatientInfo();
     loadICD10Options();
     loadInspections();
-
     $('#findBtn').on('click', function () {
         const grouped = $('#repeated').is(':checked');
         const icdRoots = $('#mkbs').val();
@@ -333,28 +298,22 @@ $(document).ready(function () {
         loadInspections(grouped, icdRoots, page, size);
     });
 });
-
 function OpenChild(id) {
     const element = document.getElementById(id);
-    
     if (!element) {
-        console.log(`Элемент с id ${id} не найден`);
         return;
     }
-
     if (element.style.display === "none") {
         element.style.display = "block";
     } else {
         element.style.display = "none";
     }
 }
-
 function getPatientId() {
     const pathname = window.location.pathname;
     const patientIdMatch = pathname.match(/\/patient\/([a-f0-9-]+)/i);
     return patientIdMatch ? patientIdMatch[1] : '39abadc7-9656-4d74-bd7e-28e927a1f81b';
 }
-
 function MedicalCardCreate(){
     const patientId = getPatientId();
     localStorage.removeItem("patientId");
@@ -362,7 +321,6 @@ function MedicalCardCreate(){
     localStorage.setItem("patientId", patientId);
     window.location.href = "/inspectionCreate";
 }
-
 function AddInspection(inspectionId) {
     const patientId = getPatientId();
     localStorage.removeItem("patientId");
