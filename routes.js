@@ -58,6 +58,12 @@ router
             setPageTitle(`Consultations`);
         });
     })
+    .on("/reports", () => {
+        $.get("/pages/report/report.html", (data) => {
+            updatePage(data);
+            setPageTitle(`report`);
+        });
+    })
     .notFound(() => {
         updatePage("<h1>404 - Page Not Found</h1>");
     });

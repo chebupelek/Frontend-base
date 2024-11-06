@@ -1,0 +1,39 @@
+<div class="container align-items-center justify-items-center mt-5 w-75">
+    <form class="mb-3">
+        <div class="row align-items-center justify-items-center">
+            <div class="col-12 text-start">
+                <div class="h2">Отчет</div>
+            </div>
+        </div>
+    </form>
+
+    <form class="border p-4 shadow-sm rounded mb-3" style="background-color: #f6f6fb">  
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-6">
+                <label for="start" style="color: #8d8da9" class="form-label mx-3">Дата с</label>
+                <input type="date" class="form-control w-100" id="start">
+            </div>
+            <div class="col-6">
+                <label for="finish" style="color: #8d8da9" class="form-label mx-3">Дата по</label>
+                <input type="date" class="form-control w-100" id="finish">
+            </div>
+        </div>
+        <div class="row align-items-center justify-items-center mb-3">
+            <div class="col-12">
+                <label for="mkbs" style="color: #8d8da9" class="form-label">МКБ-10</label>
+                <select id="mkbs" class="form-select w-100 text-truncate" style="width: 100%;">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="row align-items-center mb-3">
+            <div class="col-12">
+                <button class="btn btn-primary w-100" id="findBtn" type="button" disabled>Получить сводку</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="align-items-center justify-items-center" id="tableContainer"></div>
+
+<script src="/scripts/report.js"></script>
