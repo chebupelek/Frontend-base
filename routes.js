@@ -49,7 +49,13 @@ router
     .on("/inspection/:id", (params, query) => {
         $.get("/pages/inspectiondata/inspectionData.html", (data) => {
             updatePage(data);
-            setPageTitle(`Create`);
+            setPageTitle(`Data`);
+        });
+    })
+    .on("/consultations", () => {
+        $.get("/pages/consultations/consultations.html", (data) => {
+            updatePage(data);
+            setPageTitle(`Consultations`);
         });
     })
     .notFound(() => {
